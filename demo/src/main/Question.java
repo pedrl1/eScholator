@@ -1,23 +1,20 @@
-public class Question {
+public abstract class Question {
 
     private String text;
-    private String[] alternatives;
     private int difficulty;
     private int correctAltIndex;
 
     public Question(String text, String[] alternatives, int difficulty, int correctAltIndex) {
         this.text = text;
-        this.alternatives = alternatives;
         this.difficulty = difficulty;
         this.correctAltIndex = correctAltIndex;
     }
 
+    public abstract void showText();
+    public abstract boolean evaluateAnswer(int altIndex);
+
     public String getText() {
         return text;
-    }
-
-    public String[] getAlternatives() {
-        return alternatives;
     }
 
     public int getDifficulty() {
@@ -28,7 +25,4 @@ public class Question {
         return correctAltIndex;
     }
 
-    public boolean evaluateAnswer(int altIndex) {
-        return altIndex == correctAltIndex;
-    }
 }
