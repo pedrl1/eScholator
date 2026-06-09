@@ -48,28 +48,7 @@ public class BattleManager {
     private void attackPhase() {
         System.out.println("\n[PHASE 1: ATTACK]");
         
-        Question attackQuestion = questionBank.getRandomQuestion(round.getRoundNumber() * difficultyMultiplier);
-        
-        if (attackQuestion == null) {
-            System.out.println("No more questions available!");
-            return;
-        }
-        
-        System.out.println("Question: " + attackQuestion.getText());
-        displayQuestionAlternatives(attackQuestion);
-        
-        int playerAnswer = getPlayerInput(attackQuestion.getAlternatives().length);
-        
-        if (attackQuestion.evaluateAnswer(playerAnswer)) {
-            int damage = calculateDamage(player.getAttack(), enemy.getDefense(), difficultyMultiplier);
-            enemy.takeDamage(damage);
-            scoreSystem.addPoints(10 * difficultyMultiplier);
-        }
-        else {
-            int damage = calculateDamage(enemy.getAttack(), player.getDefense(), difficultyMultiplier);
-            player.takeDamage(damage);
-            scoreSystem.addPoints(-10);
-        }
+        round.startRound(); 
     }
 
     private void defensePhase() {

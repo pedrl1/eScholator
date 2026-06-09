@@ -13,6 +13,7 @@ public class ToFQuestions extends Question {
 
     @Override
     public boolean evaluateAnswer(String altIndex) {
-        //logic here
+        int playerAnswer = Integer.parseInt(altIndex) - 1; 
+        return playerAnswer == getCorrectAltIndex();
     }
 }
