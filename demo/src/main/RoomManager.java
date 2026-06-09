@@ -1,9 +1,11 @@
 public class RoomManager {
     
     private int roomIndex;
+    private BattleManager battleManager;
     
     public RoomManager(int initialRoom) {
         this.roomIndex = initialRoom;
+        this.battleManager = new BattleManager();
     }
     
     public void nextRoom() {

@@ -12,6 +12,4 @@ public class AnswerEvaluation extends Question {
         }
         return false;
     }
-
-
 }

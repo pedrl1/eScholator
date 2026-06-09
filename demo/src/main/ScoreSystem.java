@@ -15,9 +15,9 @@ public class ScoreSystem {
     
     public void updateScore(AnswerEvaluation answerEvaluation) {
         if (answerEvaluation.evaluateAnswer(answerEvaluation.getCorrectAltIndex())) {
-            addPoints(10); // Add 10 points for a correct answer
+            addPoints(10); 
         } else {
-            addPoints(-5); // Subtract 5 points for an incorrect answer
+            addPoints(-5); 
         }
     }
 }
