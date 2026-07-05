@@ -4,7 +4,7 @@ public class Enemy extends Character {
         super(name, maxHealth, attack, defense);
     }
 
-    Character[] enemy = {
+    private static Character[] enemy = {
         
         new Enemy("Lil Kid", 150, 50, 50), // very easy normal enemy
         new Enemy("High Schooler", 200, 75, 25), // very easy boss
@@ -22,7 +22,7 @@ public class Enemy extends Character {
         new Enemy("Professor", 2000, 1000, 300) // very hard boss
     };
 
-    Character getEnemy(int index) {
+    public static Character getEnemy(int index) {
         if (index >= 0 && index < enemy.length) {
             return enemy[index];
         }

@@ -22,6 +22,10 @@ public abstract class Character {
         return attack;
     }   
 
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
     public int getDefense() {
         return defense;
     }
@@ -32,6 +36,9 @@ public abstract class Character {
 
     public int getMaxHealth() {
         return maxHealth;
+    }
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     public void takeDamage(int damage) {

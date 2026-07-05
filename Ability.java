@@ -21,7 +21,4 @@ public abstract class Ability {
     public int getCost() {
         return cost;
     }
-
-
-
 }
