@@ -17,5 +17,7 @@ The project itself was made using all the characteristics of the paradigm, such 
 - **Encapsulation**
 - **Methods** 
 
+To run, you will need maven and openJDK21 to open
 
-
+- mvn clean compile
+- mvn javafx:run

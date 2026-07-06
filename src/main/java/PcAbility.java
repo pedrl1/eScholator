@@ -1,7 +1,7 @@
 public class PcAbility extends Ability implements Power {
 
     public PcAbility(String name, String description, int cost) {
-        super(name, description, cost);
+        super(name, description, cost,3);
     }
 
     @Override

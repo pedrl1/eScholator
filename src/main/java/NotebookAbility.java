@@ -1,7 +1,7 @@
 public class NotebookAbility extends Ability implements Power {
 
     public NotebookAbility (String name, String description, int cost) {
-        super(name, description, cost);
+        super(name, description, cost,3);
     }
     
     @Override

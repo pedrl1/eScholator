@@ -6,7 +6,6 @@ public class BattleManager {
     private int currentRound;
     private enum BattleState { PlayerATK, EnemyATK, PlayerCATK }
     private BattleState currentState;
-    private boolean defenseyayy;
     private Question currentQuestion;
     private boolean suddenDeath;
 
@@ -17,7 +16,6 @@ public class BattleManager {
         this.difficultyMultiplier = difficultyMultiplier;
         this.currentRound = 0;
         this.currentState = BattleState.PlayerATK;
-        this.defenseyayy = false;
         this.suddenDeath = false;
     }
 
@@ -25,6 +23,7 @@ public class BattleManager {
         currentRound = 0;
         currentState = BattleState.PlayerATK;
         suddenDeath = false;
+        nextPhase();
     }
 
     public Question getCurrentQuestion() { return currentQuestion; }
@@ -47,13 +46,43 @@ public class BattleManager {
         }
     }
 
+    public boolean evaluateAnswer(int answerIndex) {
+        if (currentQuestion == null) return false;
+        boolean correct = currentQuestion.evaluateAnswer(answerIndex);
+        if (correct) {
+            enemy.takeDamage(player.getDamage());
+            player.gainExperience(20);
+        } else {
+            player.takeDamage(enemy.getAttack());
+        }
+
+        // Transição de fases
+        if (suddenDeath) {
+            // Em morte súbita, após cada pergunta o round avança
+            advanceRound();
+        } else {
+            switch (currentState) {
+                case PlayerATK:
+                    currentState = BattleState.EnemyATK;
+                    break;
+                case EnemyATK:
+                    currentState = BattleState.PlayerCATK;
+                    break;
+                case PlayerCATK:
+                    advanceRound();
+                    break;
+            }
+        }
+        if (!isBattleOver()) nextPhase();
+        return correct;
+    }
+
     private void advanceRound() {
         currentRound++;
         if (currentRound >= 3) {
             if (enemy.isAlive()) suddenDeath = true;
         } else {
             currentState = BattleState.PlayerATK;
-            defenseyayy = false;
         }
     }
 
@@ -72,22 +101,4 @@ public class BattleManager {
             default: return "UNKNOWN";
         }
     }
-
-    // Métodos adicionados
-    public QuestionDB getQuestionDB() { return questionDB; }
-
-    public boolean evaluateAnswer(int answerIndex) {
-        if (currentQuestion == null) return false;
-        boolean correct = currentQuestion.evaluateAnswer(answerIndex);
-        if (correct) {
-            enemy.takeDamage(player.getDamage());
-            player.gainExperience(20);
-        } else {
-            player.takeDamage(enemy.getAttack());
-        }
-        advanceRound();
-        return correct;
-    }
-
-    public void setCurrentQuestion(Question q) { this.currentQuestion = q; }
 }
